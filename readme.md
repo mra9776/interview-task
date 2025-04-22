@@ -1,6 +1,20 @@
 # notes
 
-1. jdk15 issue
+- Spend time writing following project was about 1.5 hour, without any AI help.
+- I wonder how fast it could be done using AI tools with following strategies:
+    1. fully rely on, starting explaining APIs and requirements. (with tools like firebase.studio or Cursor AI)
+
+        - let the AI split the task, and figure out each part.
+
+    2. Splitting and planning would be done by me. writing each class/method by AI. (with llms such as deepseek, chatgpt, ...) 
+
+        - using bite sized problems in order to let AI use less contexts for each problem, allowing me to refine each
+          unit
+          in a better way.
+
+    3. Using AI for generating tests. (copilot, ...)
+
+- jdk15 issue
     - https://spring.io/blog/2022/05/24/preparing-for-spring-boot-3-0
       jdk17 is minimum for using spring boot 3.x
     - security issues:
