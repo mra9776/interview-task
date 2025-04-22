@@ -1,16 +1,20 @@
 package com.neofitech.interviewtask.second;
 
 import lombok.val;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.io.TempDir;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 class SecondServiceTest {
 
@@ -34,6 +38,32 @@ class SecondServiceTest {
 
     }
 
+
+    @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    @Execution(ExecutionMode.CONCURRENT)
+    class ServiceTest {
+        private SecondService service;
+
+        @BeforeAll
+        public void setup() throws IOException {
+            val sampleMap = new HashMap<String, Object>() {{
+                put("k1", "v1");
+                put("k2", "v2");
+            }};
+            val configReader = mock(ConfigReader.class);
+            when(configReader.readFile(any())).thenReturn(sampleMap);
+            this.service = spy(new SecondService(configReader));
+            doAnswer(invocation -> Math.random() > 0.5).when(service).cacheInvalid();
+        }
+
+        @RepeatedTest(1000)
+        void readValue() throws IOException {
+            String value = (String) service.readValue("k1");
+            assertEquals("v1", value);
+        }
+
+    }
 
     private Path writeSampleFile(Path filePath) throws IOException {
         String body = """
