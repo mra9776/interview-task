@@ -39,11 +39,12 @@
         4. enqueue writes, try to commit after we got the lock.
     - Filesystem sync and flushing considerations?
 
-- Testing:
-    - I just wrote simple tests for SecondService.
-    - And also generally I'm avoiding Tests which needs Spring Contexts. They're heavy, running is time-consuming, and
-      sometimes messy.
-    - Tests I didn't write:
-        - Services: Tests for each: todo
-        - Controllers: WebMvcTest: No need yet.
-        - Integration tests: postponed, 
+# Testing:
+
+- I just wrote simple tests for SecondService.
+- And also generally I'm avoiding Tests which needs Spring Contexts. They're heavy, running is time-consuming, and
+  sometimes messy.
+- Tests I didn't write:
+    - Services: Tests for each: todo
+    - Controllers: WebMvcTest: No need yet.
+    - Integration tests: postponed, 
